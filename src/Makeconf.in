@@ -1,0 +1,5 @@
+MKOCTFILE = mkoctfile
+LIBS = -lginac -lcln
+
+%.o: %.cc ; $(MKOCTFILE) -c $<
+%.oct: %.cc ; $(MKOCTFILE) $(LIBS) $<

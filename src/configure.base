@@ -1,0 +1,10 @@
+dnl autoconf 2.13 certainly doesn't work! What is the minimum requirement?
+AC_PREREQ(2.2)
+
+AC_INIT(configure.base)
+  
+dnl Checking for ginac library
+PKG_CHECK_MODULES(GINAC, ginac, , [AC_MSG_ERROR([GINAC not found])])
+  
+dnl Check for gmp library
+dnl AC_CHECK_LIB(gmp, __gmpz_init, , [AC_MSG_ERROR([GNU MP not found])])
