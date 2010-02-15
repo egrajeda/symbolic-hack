@@ -1,6 +1,6 @@
 symbolic >> Symbolic algebra
 Symbols
- symbols sym
+ symbols sym syms
  ex_matrix Pi
 Extended precision arithmetic
  digits	

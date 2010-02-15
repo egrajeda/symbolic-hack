@@ -1,0 +1,5 @@
+*.o
+*.swp
+src/config.log
+src/config.status
+src/symbols.oct
