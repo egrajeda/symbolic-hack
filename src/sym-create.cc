@@ -97,33 +97,38 @@ Create an object of type symbol\n")
   return retval;
 }
 
-DEFUN_DLD (syms,args, , 
+DEFUN_DLD (syms, args, nargout, 
 "-*- texinfo -*-\n\
 Create an object of type symbol\n")
 {
   mlock ();
-  octave_value retval;
   int nargin = args.length ();
 
-  if (nargin != 1)
+  if (nargin < 1)
     {
-      error("one argument expected\n");
+      error("at least one argument expected\n");
+      return octave_value ();
+    }
+  if (nargout > 0)
+    {
+      error("no output arguments expected\n");
       return octave_value ();
     }
   try 
     {
-      GiNaC::symbol xtmp(args(0).string_value());
-      octave_ex x(xtmp);
-      retval = octave_value(new octave_ex(x));
-      set_variable_value(args(0).string_value(), retval);
+      for (int i = 0; i < nargin; i++)
+        {
+          GiNaC::symbol xtmp(args(i).string_value());
+          octave_ex x(xtmp);
+          set_variable_value(args(i).string_value(), octave_value(new octave_ex(x)));
+        }
     }
   catch (std::exception &e)
     {
       error (e.what ());
-      retval = octave_value ();
     }
 
-  return retval;
+  return octave_value ();
 }
 
 // an ex DLD function might be nice 
