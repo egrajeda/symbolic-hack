@@ -363,16 +363,15 @@ w = subs (f,@{x,y@},@{1,vpa(1/3)@})\n\
 	int nargin = args.length ();
 	octave_value retval;
 
-	if (nargin != 3) {
-		error("need three arguments\n");
-		return retval;
-	}
-
 	try {
 		if (!get_expression (args(0), expression)) {
 			gripe_wrong_type_arg ("subs",args(0));
 			return retval;
 		}
+                if (nargin == 1) {
+		        retval = octave_value (new octave_ex(expression));
+                        return retval;
+                }
 		if (!(args(1).is_list() || args(1).is_cell())) {
 			if (!get_symbol (args(1), the_sym)) {
 				gripe_wrong_type_arg("subs",args(1));

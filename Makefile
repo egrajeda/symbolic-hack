@@ -10,7 +10,7 @@ TMPDIR ?= /tmp
 PACKAGE ?= $(TMPDIR)/$(PKGDIR).tar.gz
 PKG := $(shell echo $(PKGDIR) | sed -e 's|^\(.*\)-.*|\1|')
 
-all: build package
+all: build dev_install
 
 build:
 	@if [ -e src/Makefile ]; then \
@@ -25,6 +25,9 @@ package: build
 	  mv src/configure src/configure.disable; \
 	fi; \
 	cd ..; tar -czf $(PACKAGE) $(PKGDIR); \
+
+dev_install: build
+	cp src/symbols.oct ../../octave/symbolic-1.0.9/i686-pc-linux-gnu-api-v37
 
 install:
 	@cd ../; \
